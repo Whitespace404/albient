@@ -4,13 +4,20 @@
 
 <nav>
     <ul>
-        <li></li>
-        <li></li>
-        <li></li>
-        <li></li>
+        <li>Home</li>
+        <li>Ask a Question</li>
+        <li>Login</li>
+        <li>View Questions</li>
     </ul>
 </nav>
 
 <h1>Hello</h1>
+
+{% for question in questions %}
+    <h2>question: {{ question[0]}}</h2>
+    <p>{{ question[1] }}</p>
+
+    <hr>
+{% endfor %}
 
 {% endblock content %}

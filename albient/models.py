@@ -25,3 +25,10 @@ class Question(db.Model):
     title = sa.Column(sa.String(64))
     content = sa.Column(sa.Text)
     user_id = sa.Column(sa.Integer, sa.ForeignKey("user.id"))
+    comments = relationship("Comment", backref="question", lazy=True)
+
+
+class Comment(db.Model):
+    id = sa.Column(sa.Integer, primary_key=True, unique=True)
+    content = sa.Column(sa.Text)
+    question_id = sa.Column(sa.Integer, sa.ForeignKey("question.id"))

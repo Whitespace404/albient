@@ -1,10 +1,10 @@
-from albient import db
+from albient import db, login_manager
+from flask_login import UserMixin
 import sqlalchemy as sa
 from sqlalchemy.orm import relationship
 
 
-class User(db.Model):
-    __tablename__ = "User"
+class User(db.Model, UserMixin):
     id = sa.Column(sa.Integer, primary_key=True, unique=True)
     email = sa.Column(sa.String(320))
     username = sa.Column(sa.String(64), nullable=False, unique=True)
@@ -15,8 +15,13 @@ class User(db.Model):
     questions = relationship("Question", backref="op", lazy=True)
 
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
+
+
 class Question(db.Model):
     id = sa.Column(sa.Integer, primary_key=True, unique=True)
-    user_id = sa.Column(sa.Integer, sa.ForeignKey("user.id"))
     title = sa.Column(sa.String(64))
     content = sa.Column(sa.Text)
+    user_id = sa.Column(sa.Integer, sa.ForeignKey("user.id"))

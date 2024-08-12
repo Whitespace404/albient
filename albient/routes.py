@@ -56,7 +56,10 @@ def register():
         return redirect(url_for("login"))
     return render_template("register.html", form=form, title="Register")
 
-    if form.validate_on_submit:
-        print(form.username.data)
-        print(form.password.data)
-    return render_template("register.html", form=form)
+
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash("Logged out")
+    return redirect(url_for("home"))

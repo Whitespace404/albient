@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <div class="form">
+    <form action="" method="POST">
+      <fieldset>
+        <legend>Ask a Question</legend>
+        {{ form.hidden_tag() }}
+
+        {{ form.title.label }}
+        {% if form.title.errors %}
+          {{ form.title() }}
+
+          {% for error in form.title.errors %}
+            <span class="form-error">{{ error }}</span>
+          {% endfor %}
+        {% else %}
+          {{ form.title() }}
+        {% endif %}
+
+        {{ form.content.label }}
+        {% if form.content.errors %}
+          {{ form.content() }}
+
+          {% for error in form.content.errors %}
+            <span class="form-error">{{ error }}</span>
+          {% endfor %}
+        {% else %}
+          {{ form.content() }}
+        {% endif %}
+
+        {{ form.submit() }}
+      </fieldset>
+    </form>
+  </div>
+{% endblock %}

@@ -19,7 +19,8 @@
 
     <nav>
       <a href="{{ url_for('home') }}">Albient</a>
-      <a href="{{ url_for('register') }}">Register</a>    
+      <a href="{{ url_for('register') }}">Register</a>
+      <a href="{{ url_for('ask') }}">Ask</a>
 
       {% if current_user.is_authenticated %}
         <span>Welcome, {{ current_user.username }}</span>

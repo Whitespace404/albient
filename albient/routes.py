@@ -2,21 +2,15 @@ from flask import render_template, redirect, url_for, flash, request
 from flask_login import current_user, login_required, login_user, logout_user
 
 from albient import app, db
-from albient.forms import LoginForm, CreateUserForm
-from albient.models import User
+from albient.forms import LoginForm, CreateUserForm, CreatePostForm
+from albient.models import User, Question
 
 
 @app.route("/home")
 @app.route("/")
 def home():
-    ish = [
-        [
-            "What is 1+1",
-            "I am not having the clarity in the maths you know what is 1+1 is",
-        ],
-        ["how to do crosss aldol addiotn", "ethanal"],
-    ]
-    return render_template("home.html", questions=ish)
+    questions = Question.query.all()
+    return render_template("home.html", questions=questions)
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -39,6 +33,14 @@ def login():
     return render_template("login.html", form=form, title="Login")
 
 
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash("Logged out")
+    return redirect(url_for("home"))
+
+
 @app.route("/register", methods=["GET", "POST"])
 def register():
     form = CreateUserForm()
@@ -57,9 +59,14 @@ def register():
     return render_template("register.html", form=form, title="Register")
 
 
-@app.route("/logout")
-@login_required
-def logout():
-    logout_user()
-    flash("Logged out")
-    return redirect(url_for("home"))
+@app.route("/ask", methods=["GET", "POST"])
+def ask():
+    form = CreatePostForm()
+    if form.validate_on_submit():
+        question = Question(title=form.title.data, content=form.content.data)
+        db.session.add(question)
+        db.session.commit()
+
+        flash("Question posted")
+        return redirect(url_for("home"))
+    return render_template("create_post.html", form=form, title="Ask A Question")

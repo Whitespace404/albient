@@ -27,3 +27,8 @@ class CreatePostForm(FlaskForm):
     title = StringField("Title", validators=[Length(max=31)])
     content = TextAreaField()
     submit = SubmitField()
+
+
+class ReplyPostForm(FlaskForm):
+    content = TextAreaField("Reply")
+    submit = SubmitField()

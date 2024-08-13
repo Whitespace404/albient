@@ -2,8 +2,8 @@ from flask import render_template, redirect, url_for, flash, request
 from flask_login import current_user, login_required, login_user, logout_user
 
 from albient import app, db
-from albient.forms import LoginForm, CreateUserForm, CreatePostForm
-from albient.models import User, Question
+from albient.forms import LoginForm, CreateUserForm, CreatePostForm, ReplyPostForm
+from albient.models import User, Question, Comment
 
 
 @app.route("/home")
@@ -58,15 +58,34 @@ def register():
         return redirect(url_for("login"))
     return render_template("register.html", form=form, title="Register")
 
-
 @app.route("/ask", methods=["GET", "POST"])
+@login_required
 def ask():
     form = CreatePostForm()
     if form.validate_on_submit():
-        question = Question(title=form.title.data, content=form.content.data)
+        question = Question(title=form.title.data, content=form.content.data, op=current_user)
         db.session.add(question)
         db.session.commit()
 
         flash("Question posted")
         return redirect(url_for("home"))
     return render_template("create_post.html", form=form, title="Ask A Question")
+
+
+@app.route("/view_question", methods=["GET", "POST"])
+def view_question():
+    post_id = request.args.get("id")
+    assert post_id is not None
+    question = Question.query.filter_by(id=post_id).first()
+    replies = Comment.query.filter_by(question=question).all()
+
+    form = ReplyPostForm()
+
+    if form.validate_on_submit():
+        reply = Comment(content=form.content.data, question=question, op=current_user)
+        db.session.add(reply)
+        db.session.commit()
+        flash("Reply added")
+        return render_template("view_question.html", form=form, title="Reply", question=question, replies=replies)
+    return render_template("view_question.html", form=form, title="Reply", question=question, replies=replies)
+

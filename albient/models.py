@@ -12,8 +12,10 @@ class User(db.Model, UserMixin):
     password = sa.Column(sa.String(64), nullable=False)
 
     rep_points = sa.Column(sa.Integer)
-    questions = relationship("Question", backref="op", lazy=True)
 
+    questions = relationship("Question", backref="op", lazy=True)
+    replies = relationship("Comment", backref="op", lazy=True)
+    
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -32,3 +34,4 @@ class Comment(db.Model):
     id = sa.Column(sa.Integer, primary_key=True, unique=True)
     content = sa.Column(sa.Text)
     question_id = sa.Column(sa.Integer, sa.ForeignKey("question.id"))
+    user_id = sa.Column(sa.Integer, sa.ForeignKey("user.id"))

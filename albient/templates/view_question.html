@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <h2> {{ question.title }} </h2>
+    <p> {{ question.content }}
+
+        <hr>
+    {% for reply in replies %}
+        <h3>"{{ reply.content }}" -{{ reply.op.display_name }}</h3>
+    {% endfor %}
+
+  <div class="form">
+    <form action="" method="POST">
+      <fieldset>
+        {{ form.hidden_tag() }}
+
+        {{ form.content.label }}
+        {% if form.content.errors %}
+          {{ form.content() }}
+
+          {% for error in form.content.errors %}
+            <span class="form-error">{{ error }}</span>
+          {% endfor %}
+        {% else %}
+          {{ form.content() }}
+        {% endif %}
+
+        {{ form.submit() }}
+      </fieldset>
+    </form>
+  </div>
+{% endblock %}

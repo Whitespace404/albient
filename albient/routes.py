@@ -58,6 +58,7 @@ def register():
         return redirect(url_for("login"))
     return render_template("register.html", form=form, title="Register")
 
+
 @app.route("/ask", methods=["GET", "POST"])
 @login_required
 def ask():
@@ -86,6 +87,6 @@ def view_question():
         db.session.add(reply)
         db.session.commit()
         flash("Reply added")
-        return render_template("view_question.html", form=form, title="Reply", question=question, replies=replies)
+        return redirect(url_for('view_question', id=question.id))
     return render_template("view_question.html", form=form, title="Reply", question=question, replies=replies)
 

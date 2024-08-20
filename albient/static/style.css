@@ -1,3 +1,87 @@
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Space Mono';
+}
+
 h1 {
     color: hotpink;
+    margin-left: 10px;
+}
+
+.question {
+    background-color: #f3f3f3;
+    border-radius: 10px;
+    margin: 10px 10px;
+    padding: 10px;
+    border: 2px solid silver;
+}
+
+nav.obc {
+    display: flex;
+    justify-content: space-evenly;
+    background-color: rgb(5, 143, 185);
+    padding: 10px 0px;
+}
+
+.obc a {
+    text-decoration: none;
+    color: white;
+    transition: all 100ms;
+}
+
+.obc span {
+    color: white;
+}
+
+.obc a:hover {
+    text-decoration: underline;
+}
+
+.question a {
+    color: rgb(5, 104, 185);
+}
+
+.flash-message {
+    padding: 10px 0;
+    padding-left: 10px;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 40px;
+}
+
+.form input {
+    display: block;
+    padding: 5px 5px;
+    font-family: 'Space Mono';
+    max-width: max-content;
+}
+
+.form #submit {
+    padding: 10px;
+    font-family: 'Space Mono';
+    margin-top: 10px;
+    outline: 0;
+    border: 1px solid silver;
+    background-color: #058fb9;
+    color: white;
+    border-radius: 5px;
+}
+
+.form #submit:hover {
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.form textarea {
+    width: 1000px;
+}
+
+.flash-message {
+    border: 1px solid rgba(1, 88, 13, 0.747);
+    background-color: rgba(50, 205, 50, 0.507);
 }

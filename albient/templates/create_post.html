@@ -12,7 +12,7 @@
           {{ form.title() }}
 
           {% for error in form.title.errors %}
-            <span class="form-error">{{ error }}</span>
+            <p class="form-error">{{ error }}</p>
           {% endfor %}
         {% else %}
           {{ form.title() }}
@@ -23,7 +23,7 @@
           {{ form.content() }}
 
           {% for error in form.content.errors %}
-            <span class="form-error">{{ error }}</span>
+            <p class="form-error">{{ error }}</p>
           {% endfor %}
         {% else %}
           {{ form.content() }}

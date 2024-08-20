@@ -6,11 +6,12 @@
 <h1>View Questions</h1>
 
 {% for question in questions %}
+<div class="question">
     <h2>Q: {{ question.title }}</h2>
     <h3>asked by {{ question.op.display_name }} </h6>
-    <p>{{ question.content }}</p>
-    <a href="{{ url_for('view_question', id=question.id) }}">Reply</a>
-    <hr>
+        <p>{{ question.content }}</p>
+        <a href="{{ url_for('view_question', id=question.id) }}">Answer</a>
+</div>
 {% endfor %}
 
 {% endblock content %}

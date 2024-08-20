@@ -2,32 +2,38 @@
 
 {% block content %}
 
-    <h2> {{ question.title }} </h2>
-    <p> {{ question.content }}
+<div>
+  <h2> {{ question.title }} </h2>
+  <p> {{ question.content }}
 
-        <hr>
+    <hr>
+  <div class="replies">
     {% for reply in replies %}
-        <h3>"{{ reply.content }}" -{{ reply.op.display_name }}</h3>
+    <div class="reply">
+      <h3>"{{ reply.content }}" -{{ reply.op.display_name }}</h3>
+    </div>
     {% endfor %}
-
-  <div class="form">
-    <form action="" method="POST">
-      <fieldset>
-        {{ form.hidden_tag() }}
-
-        {{ form.content.label }}
-        {% if form.content.errors %}
-          {{ form.content() }}
-
-          {% for error in form.content.errors %}
-            <span class="form-error">{{ error }}</span>
-          {% endfor %}
-        {% else %}
-          {{ form.content() }}
-        {% endif %}
-
-        {{ form.submit() }}
-      </fieldset>
-    </form>
   </div>
+</div>
+
+<div class="reply-form">
+  <form action="" method="POST">
+    <fieldset>
+      {{ form.hidden_tag() }}
+
+      {{ form.content.label }}
+      {% if form.content.errors %}
+      {{ form.content() }}
+
+      {% for error in form.content.errors %}
+      <p class="form-error">{{ error }}</p>
+      {% endfor %}
+      {% else %}
+      {{ form.content() }}
+      {% endif %}
+
+      {{ form.submit() }}
+    </fieldset>
+  </form>
+</div>
 {% endblock %}

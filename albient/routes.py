@@ -9,7 +9,7 @@ from albient.models import User, Question, Comment
 @app.route("/home")
 @app.route("/")
 def home():
-    questions = Question.query.all()
+    questions = Question.query.order_by(Question.id.desc()).all()
     return render_template("home.html", questions=questions)
 
 
@@ -19,7 +19,7 @@ def login():
         return redirect(url_for("home"))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first()
+        user = User.query.filter_by(email=form.email.data).first() # .first(), .all(), .last()
         if user is None:
             flash("Incorrect username/password", "alert")
         elif form.password.data == user.password:
@@ -76,8 +76,8 @@ def ask():
 @app.route("/view_question", methods=["GET", "POST"])
 def view_question():
     post_id = request.args.get("id")
-    assert post_id is not None
     question = Question.query.filter_by(id=post_id).first()
+    assert question is not None
     replies = Comment.query.filter_by(question=question).all()
 
     form = ReplyPostForm()

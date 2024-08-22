@@ -85,3 +85,21 @@ nav.obc {
     border: 1px solid rgba(1, 88, 13, 0.747);
     background-color: rgba(50, 205, 50, 0.507);
 }
+
+.view-question {
+    padding: 20px;
+    border: 2px solid silver;
+    margin: 10px;
+}
+
+.reply {
+    font-size: 10px;
+}
+
+.reply small {
+    font-size: 12px;
+}
+
+.reply-form {
+    
+}

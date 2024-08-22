@@ -31,4 +31,4 @@ class CreatePostForm(FlaskForm):
 
 class ReplyPostForm(FlaskForm):
     content = TextAreaField("Reply")
-    submit = SubmitField()
+    submit = SubmitField("Reply")

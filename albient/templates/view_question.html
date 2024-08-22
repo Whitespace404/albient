@@ -2,15 +2,14 @@
 
 {% block content %}
 
-<div>
-  <h2> {{ question.title }} </h2>
-  <p> {{ question.content }}
-
-    <hr>
+<div class="view-question">
+  <h2 class="question-title"> {{ question.title }} </h2>
+  <p class="question-content"> {{ question.content }} </p>
   <div class="replies">
     {% for reply in replies %}
     <div class="reply">
-      <h3>"{{ reply.content }}" -{{ reply.op.display_name }}</h3>
+      <small>{{ reply.op.display_name }}</small>
+      <h3 class="reply-content">{{ reply.content }}</h3>
     </div>
     {% endfor %}
   </div>
@@ -21,7 +20,6 @@
     <fieldset>
       {{ form.hidden_tag() }}
 
-      {{ form.content.label }}
       {% if form.content.errors %}
       {{ form.content() }}
 

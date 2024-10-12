@@ -1,5 +1,12 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SubmitField, PasswordField, EmailField, TextAreaField
+from wtforms import (
+    StringField,
+    SubmitField,
+    PasswordField,
+    EmailField,
+    TextAreaField,
+    SelectMultipleField,
+)
 from wtforms.validators import Length, EqualTo, DataRequired
 
 
@@ -26,6 +33,7 @@ class LoginForm(FlaskForm):
 class CreatePostForm(FlaskForm):
     title = StringField("Title", validators=[Length(max=31)])
     content = TextAreaField()
+    tags = StringField("Tags")
     submit = SubmitField()
 
 

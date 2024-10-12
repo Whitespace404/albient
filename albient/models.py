@@ -6,6 +6,9 @@ from sqlalchemy.orm import relationship
 
 class User(db.Model, UserMixin):
     id = sa.Column(sa.Integer, primary_key=True, unique=True)
+
+    role_id = sa.Column(sa.Integer, default=0)  # 0 for normal users, 1 for admin
+
     email = sa.Column(sa.String(320))
     username = sa.Column(sa.String(64), nullable=False, unique=True)
     display_name = sa.Column(sa.String(32))
@@ -15,7 +18,7 @@ class User(db.Model, UserMixin):
 
     questions = relationship("Question", backref="op", lazy=True)
     replies = relationship("Comment", backref="op", lazy=True)
-    
+
 
 @login_manager.user_loader
 def load_user(user_id):
@@ -28,6 +31,9 @@ class Question(db.Model):
     content = sa.Column(sa.Text)
     user_id = sa.Column(sa.Integer, sa.ForeignKey("user.id"))
     comments = relationship("Comment", backref="question", lazy=True)
+    tags = sa.Column(sa.String(32))
+    votes = sa.Column(sa.Integer, default=0)
+    is_resolved = sa.Column(sa.Boolean, default=False)
 
 
 class Comment(db.Model):

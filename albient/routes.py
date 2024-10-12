@@ -64,7 +64,7 @@ def register():
 def ask():
     form = CreatePostForm()
     if form.validate_on_submit():
-        question = Question(title=form.title.data, content=form.content.data, op=current_user)
+        question = Question(title=form.title.data, content=form.content.data, op=current_user, tags=form.tags.data)
         db.session.add(question)
         db.session.commit()
 

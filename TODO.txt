@@ -1,0 +1,41 @@
+the goal now is to just get a presentable project
+not to create a website 
+
+what are some steps we can take to make this project a presentable cbse project?
+
+i have the answer to that
+these are the steps to take:
+
+1. progress
+
+rn we are here (as the great srivathsa claimed)
+<----------------|------------------------------->
+but we need to be here
+<------------------------------------------|----->
+
+but how do we get there?
+
+step 1: making a list of all the work that needs to be done
+step 2: doing it.
+
+we are now performing step 1.
+
+##########################################################################################
+LIST OF PRIORITIES
+font ligatures 
+√ add question tags (subject/board)
+--> filter questions by question tag/poster
+--> OP can mark a question as resolved
+--> question sorting system (upvote questions & comments) show hot questions/most upvoted questions
+--> edit posts
+--> delete posts
+--> Flag button {external may ask what to do if someone decides to make obscene comments}
+--> user profile page
+--> no home page 
+##########################################################################################
+
+rahul thinks this is enough. if we have all this, we should have a presentable project
+which is a goal 
+
+YET.
+we can style this in school.

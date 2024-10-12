@@ -28,6 +28,17 @@
         {% else %}
           {{ form.content() }}
         {% endif %}
+        <br>
+        {{ form.tags.label }}
+        {% if form.tags.errors %}
+          {{ form.tags() }}
+
+          {% for error in form.tags.errors %}
+            <p class="form-error">{{ error }}</p>
+          {% endfor %}
+        {% else %}
+          {{ form.tags() }}
+        {% endif %}
 
         {{ form.submit() }}
       </fieldset>

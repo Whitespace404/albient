@@ -25,7 +25,9 @@ def login():
         elif form.password.data == user.password:
             login_user(user)
             flash(f"Logged in")
-            next_page = request.args.get("next")
+            next_page = request.args.get(
+                "next"
+            )  # make sure you understand this @SP, @SP
             return redirect(next_page if next_page else url_for("home"))
         else:
             flash("Incorrect username/password", "alert")
@@ -90,3 +92,8 @@ def view_question():
         return redirect(url_for('view_question', id=question.id))
     return render_template("view_question.html", form=form, title="Reply", question=question, replies=replies)
 
+
+@app.route("/view_user/<username>")
+def view_user(username):
+    user = User.query.filter_by(username=username).first()
+    return render_template("view_user.html", user=user)

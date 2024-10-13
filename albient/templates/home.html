@@ -9,7 +9,7 @@
 <div class="question">
     <small>Tags: {{ question.tags }}</small>
     <a href="{{ url_for('view_question', id=question.id) }}" class="question-title">Q: {{ question.title }}</a>
-    <h3>asked by {{ question.op.display_name }} </h6>
+    <h3>asked by <a href="{{ url_for('view_user', username=question.op.username)}}">{{ question.op.display_name }}</a> </h6>
         <p>{{ question.content }}</p>
 </div>
 {% endfor %}

@@ -4,12 +4,27 @@ from flask_login import current_user, login_required, login_user, logout_user
 from albient import app, db
 from albient.forms import LoginForm, CreateUserForm, CreatePostForm, ReplyPostForm
 from albient.models import User, Question, Comment, Vote
+import sqlalchemy as sa
 
+from flask import request
 
 @app.route("/home")
 @app.route("/")
 def home():
-    questions = Question.query.order_by(Question.id.desc()).all()
+    sort_by = request.args.get("sort_by", "id")
+
+    if sort_by == "popularity":
+        questions = Question.query.order_by(Question.votes.desc()).all()
+    elif sort_by == "comments":
+        questions = (
+            Question.query.outerjoin(Comment)
+            .group_by(Question.id)
+            .order_by(sa.func.count(Comment.id).desc())
+            .all()
+        )
+    else:
+        questions = Question.query.order_by(Question.id.desc()).all()
+
     return render_template("home.html", questions=questions)
 
 

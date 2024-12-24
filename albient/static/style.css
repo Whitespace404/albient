@@ -1,7 +1,8 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Space Mono';
+    font-family: 'Roboto Mono';
+        background: rgb(208, 208, 208);
 }
 
 h1 {
@@ -103,4 +104,25 @@ nav.obc {
 .question-title {
     display: block;
     font-size: 26px;
+}
+
+.vote-buttons a {
+    cursor: pointer;
+    padding: 10px;
+    display: block;
+    outline: 3px solid black;
+    text-decoration: none;
+}
+
+.vote-buttons .upvote-icon {
+    color: green;
+}
+
+.vote-buttons .downvote-icon {
+    color: red;
+}
+
+.vote-buttons {
+    display: flex;
+    gap: 15px;
 }

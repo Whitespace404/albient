@@ -7,10 +7,15 @@
 
 {% for question in questions %}
 <div class="question">
+    <div class="vote-buttons">
+        <a class="vote-button upvote-icon" href="{{url_for('upvote_post', post_id=question.id, del=1) }}">&#9650;</a>
+        <a class="vote-button downvote-icon" href="{{url_for('upvote_post', post_id=question.id, del=-1) }}">&#9660;</a>
+    </div>
     <small>Tags: {{ question.tags }}</small>
     <a href="{{ url_for('view_question', id=question.id) }}" class="question-title">Q: {{ question.title }}</a>
     <h3>asked by <a href="{{ url_for('view_user', username=question.op.username)}}">{{ question.op.display_name }}</a> </h6>
         <p>{{ question.content }}</p>
+    <p>Votes: {{ question.votes }}</p>
 </div>
 {% endfor %}
 

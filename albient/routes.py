@@ -25,9 +25,7 @@ def login():
         elif form.password.data == user.password:
             login_user(user)
             flash(f"Logged in")
-            next_page = request.args.get(
-                "next"
-            )  # make sure you understand this @SP, @SP
+            next_page = request.args.get("next")
             return redirect(next_page if next_page else url_for("home"))
         else:
             flash("Incorrect username/password", "alert")
@@ -96,4 +94,32 @@ def view_question():
 @app.route("/view_user/<username>")
 def view_user(username):
     user = User.query.filter_by(username=username).first()
-    return render_template("view_user.html", user=user)
+
+    qa = Question.query.filter_by(op=user).all()
+    questions_asked = len(qa)
+
+    votes = sum([i.votes for i in qa])
+
+    answers = len(Comment.query.filter_by(op=user).all())
+
+    return render_template(
+        "view_user.html", user=user, qa=questions_asked, votes=votes, answers=answers
+    )
+
+
+@app.route("/upvote_post/<post_id>")
+def upvote_post(post_id):
+    post = Question.query.filter_by(id=post_id).first()
+    post.votes += int(request.args.get("del"))
+    db.session.add(post)
+    db.session.commit()
+    return redirect(request.referrer)
+
+
+@app.route("/upvote_comment/<comment_id>")
+def upvote_comment(comment_id):
+    comment = Comment.query.filter_by(id=comment_id).first()
+    comment.votes += int(request.args.get("del"))
+    db.session.add(comment)
+    db.session.commit()
+    return redirect(request.referrer)

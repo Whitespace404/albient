@@ -3,15 +3,26 @@
 {% block content %}
 
 <div class="view-question">
+  <div class="vote-buttons">
+    <a class="vote-button upvote-icon" href="{{url_for('upvote_post', post_id=question.id, del=1) }}">&#9650;</a>
+    <a class="vote-button downvote-icon" href="{{url_for('upvote_post', post_id=question.id, del=-1) }}">&#9660;</a>
+  </div>
   <h5>Asked by <a href="{{ url_for('view_user', username=question.op.username)}}">{{ question.op.display_name }}</a></h5>
   <h2 class="question-title"> {{ question.title }} </h2>
   <p class="question-content"> {{ question.content }} </p>
 
+  <h3>Votes = {{ question.votes }}</h3>
+
   <div class="replies">
     {% for reply in replies %}
     <div class="reply">
+      <div class="vote-buttons">
+        <a class="vote-button upvote-icon" href="{{url_for('upvote_comment', comment_id=reply.id, del=1) }}">&#9650;</a>
+        <a class="vote-button downvote-icon" href="{{url_for('upvote_comment', comment_id=reply.id, del=-1) }}">&#9660;</a>
+      </div>
       <small>{{ reply.op.display_name }}</small>
       <h3 class="reply-content">{{ reply.content }}</h3>
+      <h4>Votes = {{reply.votes}}</h4>
     </div>
     {% endfor %}
   </div>

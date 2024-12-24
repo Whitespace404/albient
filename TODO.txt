@@ -30,7 +30,7 @@ font ligatures
 --> edit posts
 --> delete posts
 --> Flag button {external may ask what to do if someone decides to make obscene comments}
---> user profile page
+√ user profile page
 --> no home page 
 --> Moderators can edit tags/delete tags
 ##########################################################################################
@@ -38,5 +38,4 @@ font ligatures
 rahul thinks this is enough. if we have all this, we should have a presentable project
 which is a goal 
 
-YET.
 we can style this in school.

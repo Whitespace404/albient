@@ -24,7 +24,7 @@ we are now performing step 1.
 LIST OF PRIORITIES
 √ add question tags (subject/board)
 --> filter questions by question tag/poster
---> question sorting system (upvote questions & comments) show hot questions/most upvoted questions
+√ question sorting system (upvote questions & comments) show hot questions/most upvoted questions
 --> edit posts
 --> delete posts
 --> Flag button {external may ask what to do if someone decides to make obscene comments}

@@ -13,8 +13,6 @@ class User(db.Model, UserMixin):
     username = sa.Column(sa.String(64), nullable=False, unique=True)
     display_name = sa.Column(sa.String(32))
     password = sa.Column(sa.String(64), nullable=False)
-    questions_voted = relationship("Question", backref="voter", lazy=True)
-    comments_voted = relationship("Comment", backref="voter", lazy=True)
 
     rep_points = sa.Column(sa.Integer)
 
@@ -44,3 +42,16 @@ class Comment(db.Model):
     votes = sa.Column(sa.Integer, default=0)
     question_id = sa.Column(sa.Integer, sa.ForeignKey("question.id"))
     user_id = sa.Column(sa.Integer, sa.ForeignKey("user.id"))
+
+
+class Vote(db.Model):
+    id = sa.Column(sa.Integer, primary_key=True, unique=True)
+    user_id = sa.Column(sa.Integer, sa.ForeignKey("user.id"))
+    post_id = sa.Column(sa.Integer, sa.ForeignKey("question.id"), nullable=True)
+    comment_id = sa.Column(sa.Integer, sa.ForeignKey("comment.id"), nullable=True)
+    value = sa.Column(sa.Integer)  # +1 for upvote, -1 for downvote
+
+    __table_args__ = (
+        sa.UniqueConstraint("user_id", "post_id", name="unique_user_post_vote"),
+        sa.UniqueConstraint("user_id", "comment_id", name="unique_user_comment_vote"),
+    )

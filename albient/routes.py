@@ -3,7 +3,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 
 from albient import app, db
 from albient.forms import LoginForm, CreateUserForm, CreatePostForm, ReplyPostForm
-from albient.models import User, Question, Comment
+from albient.models import User, Question, Comment, Vote
 
 
 @app.route("/home")
@@ -96,30 +96,60 @@ def view_user(username):
     user = User.query.filter_by(username=username).first()
 
     qa = Question.query.filter_by(op=user).all()
+    ca = Comment.query.filter_by(op=user).all()
     questions_asked = len(qa)
-
-    votes = sum([i.votes for i in qa])
-
+    votes = sum([i.votes for i in qa]) + sum([i.votes for i in ca])
     answers = len(Comment.query.filter_by(op=user).all())
 
     return render_template(
-        "view_user.html", user=user, qa=questions_asked, votes=votes, answers=answers
+        "view_user.html",
+        user=user,
+        qa=questions_asked,
+        votes=votes,
+        answers=answers,
+        ca=len(ca),
     )
 
 
 @app.route("/upvote_post/<post_id>")
 def upvote_post(post_id):
+    user_id = current_user.id
+    vote_value = int(request.args.get("del"))
+
+    existing_vote = Vote.query.filter_by(user_id=user_id, post_id=post_id).first()
+    if existing_vote and existing_vote.value == vote_value:
+        return redirect(request.referrer)
+    if existing_vote and existing_vote.value != vote_value:
+        db.session.delete(existing_vote)
+
     post = Question.query.filter_by(id=post_id).first()
-    post.votes += int(request.args.get("del"))
-    db.session.add(post)
-    db.session.commit()
-    return redirect(request.referrer)
+    if post:
+        post.votes += vote_value
+        new_vote = Vote(user_id=user_id, post_id=post_id, value=vote_value)
+        db.session.add(new_vote)
+        db.session.add(post)
+        db.session.commit()
+        return redirect(request.referrer)
+    return "Post not found.", 404
 
 
 @app.route("/upvote_comment/<comment_id>")
 def upvote_comment(comment_id):
+    user_id = current_user.id
+    vote_value = int(request.args.get("del"))
+
+    existing_vote = Vote.query.filter_by(user_id=user_id, comment_id=comment_id).first()
+    if existing_vote and existing_vote.value == vote_value:
+        return redirect(request.referrer)
+    if existing_vote and existing_vote.value != vote_value:
+        db.session.delete(existing_vote)
+
     comment = Comment.query.filter_by(id=comment_id).first()
-    comment.votes += int(request.args.get("del"))
-    db.session.add(comment)
-    db.session.commit()
-    return redirect(request.referrer)
+    if comment:
+        comment.votes += vote_value
+        new_vote = Vote(user_id=user_id, comment_id=comment_id, value=vote_value)
+        db.session.add(new_vote)
+        db.session.add(comment)
+        db.session.commit()
+        return redirect(request.referrer)
+    return "Comment not found.", 404

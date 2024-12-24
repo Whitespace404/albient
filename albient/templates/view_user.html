@@ -2,12 +2,16 @@
 
 {% block content %}
 
-<h1>{{ user.display_name }}</h1>
+<h1 class="username">{{ user.display_name }}</h1>
 
 <div class="stats">
     <div class="item">
-        <h2>Questions Asked</h2>
+        <h2>Questions</h2>
         <h3>{{ qa }}</h3>
+    </div>
+    <div class="item">
+        <h2>Replies</h2>
+        <h3>{{ ca }}</h3>
     </div>
     <div class="item">
         <h2>Net votes</h2>
@@ -18,5 +22,5 @@
         <h3>{{ answers }}</h3>
     </div>
 </div>
-
+<br><hr>
 {% endblock %}

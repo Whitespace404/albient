@@ -9,7 +9,7 @@ these are the steps to take:
 1. progress
 
 rn we are here (as the great srivathsa claimed)
-<----------------|------------------------------->
+<------------------|----------------------------->
 but we need to be here
 <------------------------------------------|----->
 
@@ -22,7 +22,6 @@ we are now performing step 1.
 
 ##########################################################################################
 LIST OF PRIORITIES
-font ligatures 
 √ add question tags (subject/board)
 --> filter questions by question tag/poster
 --> OP can mark a question as resolved
@@ -38,4 +37,3 @@ font ligatures
 rahul thinks this is enough. if we have all this, we should have a presentable project
 which is a goal 
 
-we can style this in school.

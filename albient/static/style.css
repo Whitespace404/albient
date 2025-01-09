@@ -1,3 +1,11 @@
+:root {
+    --licorice: #220901ff;
+    --blood-red: #621708ff;
+    --penn-red: #941b0cff;
+    --rust: #bc3908ff;
+    --orange-web: #f6aa1cff;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -21,7 +29,7 @@ h1 {
 nav.obc {
     display: flex;
     justify-content: space-evenly;
-    background-color: rgb(5, 143, 185);
+    background-color: var(--licorice);
     padding: 10px 0px;
 }
 
@@ -126,6 +134,7 @@ nav.obc {
     display: flex;
     gap: 15px;
 }
+
 .stats {
     display: flex;
     justify-content: space-evenly;

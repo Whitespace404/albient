@@ -1,1 +1,4 @@
-ctrl K + M
+{% comment %} {% else %}
+          <a href="{{ url_for('login') }}">Login</a> {% endcomment %}
+
+base>currentuser.isauthenticated

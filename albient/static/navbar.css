@@ -1,0 +1,87 @@
+:root {
+    --seasalt: #f8f9faff;
+    --antiflash-white: #e9ecefff;
+    --platinum: #dee2e6ff;
+    --french-gray: #ced4daff;
+    --french-gray-2: #adb5bdff;
+    --slate-gray: #6c757dff;
+    --outer-space: #495057ff;
+    --onyx: #343a40ff;
+    --eerie-black: #212529ff;
+    --logo-color: #ff5733ff; /
+}
+
+nav.obc {
+    border-bottom: 4px solid var(--french-gray);
+    position: relative;
+    background-color: var(--onyx);
+    z-index: 99;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+nav.obc section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.obc img {
+    width: 97px;
+    height: 40px;
+    margin-bottom: 0;
+    padding-bottom: 0;
+}
+
+.obc div.content {
+    color: var(--antiflash-white);
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 20px;
+}
+
+.obc ul {
+    list-style-type: none;
+    display: flex;
+    gap: 0;
+    padding: 0 10px;
+    margin: 0;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.obc ul li {
+    padding: 0;
+    margin: 0;
+}
+
+.obc button {
+    border: none;
+    background-color: var(--outer-space);
+    cursor: pointer;
+    font-size: 1.2em;
+    padding: 0 20px;
+}
+
+.obc a {
+    text-decoration: none;
+    color: var(--seasalt);
+}
+
+#logo {
+    color: var(--french-gray); /* Apply new color to the logo */
+}
+
+.acounts {
+    padding: 10px;
+}
+
+.obc a svg{
+    color: white;
+}

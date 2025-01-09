@@ -1,8 +1,18 @@
-{% extends "base.html" %}
+{% extends 'base.html' %}
 
 {% block content %}
+  <h1>View Questions</h1>
 
-<h1>View Questions</h1>
+  <div class="parent">
+    <div class="view_questions">
+      <form method="get" action="{{ url_for('home') }}" class="sort-form">
+        <label for="sort_by">Sort by:</label>
+        <select id="sort_by" name="sort_by" onchange="this.form.submit()">
+            <option value="id" {% if request.args.get('sort_by') == 'id' %}selected{% endif %}>Newest</option>
+            <option value="popularity" {% if request.args.get('sort_by') == 'popularity' %}selected{% endif %}>Popularity</option>
+            <option value="comments" {% if request.args.get('sort_by') == 'comments' %}selected{% endif %}>Answers</option>
+        </select>
+      </form>  
 
 <form method="get" action="{{ url_for('home') }}">
     <label for="sort_by">Sort by:</label>
@@ -21,12 +31,12 @@
         <a class="vote-button upvote-icon" href="{{url_for('upvote_post', post_id=question.id, del=1) }}">&#9650;</a>
         <a class="vote-button downvote-icon" href="{{url_for('upvote_post', post_id=question.id, del=-1) }}">&#9660;</a>
     </div>
-    <small>Tags: {{ question.tags }}</small>
-    <a href="{{ url_for('view_question', id=question.id) }}" class="question-title">Q: {{ question.title }}</a>
-    <h3>asked by <a href="{{ url_for('view_user', username=question.op.username)}}">{{ question.op.display_name }}</a> </h6>
-        <p>{{ question.content }}</p>
-    <p>Votes: {{ question.votes }}</p>
-</div>
-{% endfor %}
 
-{% endblock content %}
+    <div class="ask_questions">
+        <h2>Ask a Question</h2>
+
+        <button><a href="{{ url_for('ask') }}">Ask</a></button>
+    </div>
+  </div>
+
+{% endblock %}

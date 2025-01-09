@@ -4,7 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='syles.css') }}" />
+    <link rel="stylesheet" href="{{ url_for('static', filename='navbar.css') }}" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0&icon_names=person" />
+    <style>
+      .material-symbols-outlined {
+        font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      }
+    </style>
   </head>
 
   <body>
@@ -17,18 +24,18 @@
     {% endwith %}
 
     <nav class="obc">
-      <a href="{{ url_for('home') }}">Albient</a>
-      {% if not current_user.is_authenticated %}
-        <a href="{{ url_for('register') }}">Register</a>
-      {% endif %}
-      <a href="{{ url_for('ask') }}">Ask</a>
-
-      {% if current_user.is_authenticated %}
-        <a href="{{ url_for('logout') }}">Logout</a>
-        <span>Welcome, <a href="{{ url_for('view_user', username=current_user.username) }}">{{ current_user.username }}</a></span>
-      {% else %}
-        <a href="{{ url_for('login') }}">Login</a>
-      {% endif %}
+      <section>
+        <div class="logo">
+          <a href="{{ url_for('home') }}" id="logo">Albient</a>
+        </div>
+      </section>
+      <div class="acounts">
+        {% if not current_user.is_authenticated %}
+          <a href="{{ url_for('login') }}">Sign In</a>
+        {% else %}
+          <a href="{{ url_for('view_user', username=current_user.username) }}"><span class="material-symbols-outlined">person</span></a>
+        {% endif %}
+      </div>
     </nav>
 
     {% block content %}

@@ -5,23 +5,23 @@ with app.app_context():
     db.create_all()
 
     user = User(
-            username="flyingseverus",
-            email="sev@gmail.com",
-            password="power",
-            display_name="Sev",
-        )
+        username="flyingseverus",
+        email="sev@gmail.com",
+        password="power",
+        display_name="Sev",
+    )
     user1 = User(
-            username="pittetan",
-            email="pittan@gmail.com",
-            password="power",
-            display_name="Pittan",
-        )
+        username="pittan",
+        email="pittan@gmail.com",
+        password="power",
+        display_name="Pittan",
+    )
     user2 = User(
-            username="srivaths",
-            email="srivaths@gmail.com",
-            password="power",
-            display_name="Srivaths",
-        )
+        username="srivathsa",
+        email="srivathsa@gmail.com",
+        password="power",
+        display_name="Srivaths",
+    )
 
     db.session.add_all([user, user1, user2])
     db.session.commit()

@@ -10,7 +10,7 @@ from albient.forms import (
 )
 from albient.models import User, Question, Comment, Vote
 import sqlalchemy as sa
-from sqlalchemy import func
+from sqlalchemy import func, desc
 
 from flask import request
 
@@ -123,7 +123,9 @@ def view_question():
     post_id = request.args.get("id")
     question = Question.query.filter_by(id=post_id).first()
     assert question is not None
-    replies = Comment.query.filter_by(question=question).all()
+    replies = (
+        Comment.query.filter_by(question=question).order_by(desc(Comment.votes)).all()
+    )
 
     form = ReplyPostForm()
 

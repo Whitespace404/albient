@@ -1,56 +1,63 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<div class="view-question">
-  <div class="vote-buttons">
-    <a class="vote-button upvote-icon" href="{{url_for('upvote_post', post_id=question.id, del=1) }}">&#9650;</a>
-    <a class="vote-button downvote-icon" href="{{url_for('upvote_post', post_id=question.id, del=-1) }}">&#9660;</a>
-  </div>
-  <h5>Asked by <a href="{{ url_for('view_user', username=question.op.username)}}">{{ question.op.display_name }}</a></h5>
-  <h2 class="question-title"> {{ question.title }} </h2>
-  <p class="question-content"> {{ question.content }} </p>
-
-  <h3>Votes = {{ question.votes }}</h3>
-
-  <div class="replies">
-    {% for reply in replies %}
-    <div class="reply">
-      <div class="vote-buttons">
-        <a class="vote-button upvote-icon" href="{{url_for('upvote_comment', comment_id=reply.id, del=1) }}">&#9650;</a>
-        <a class="vote-button downvote-icon" href="{{url_for('upvote_comment', comment_id=reply.id, del=-1) }}">&#9660;</a>
+  <div class="parent">
+    <div class="view_questions">
+      <div class="question bigger">
+        <div class="vote-buttons">
+          <a class="vote-button upvote-icon" href="{{ url_for('upvote_post', post_id=question.id, del=1) }}">&#9650;</a>
+          <span>{{ question.votes }}</span>
+          <a class="vote-button downvote-icon" href="{{ url_for('upvote_post', post_id=question.id, del=- 1) }}">&#9660;</a>
+        </div>
+        <div class="notvotebuttons">
+          <a href="{{ url_for('view_question', id=question.id) }}" class="question-title">Q: {{ question.title }}</a>
+          <h4>~ <a href="{{ url_for('view_user', username=question.op.username) }}">{{ question.op.display_name }}</a></h4>
+          <p>{{ question.content }}</p>
+          <small>Tags: {{ question.tags }}</small>
+        </div>
       </div>
-      <small>{{ reply.op.display_name }}</small>
-      <h3 class="reply-content">{{ reply.content }}</h3>
-      <h4>Votes = {{reply.votes}}</h4>
-    </div>
-    {% endfor %}
-  </div>
-</div>
+      {% if current_user.is_authenticated %}
+        <div class="ask-form reply-form">
+          <h2>Reply to this question:</h2>
+          <form action="" method="POST">
+            <fieldset>
+              {{ form.hidden_tag() }}
 
+              {% if form.content.errors %}
+                {{ form.content() }}
 
-{% if current_user.is_authenticated %}
-<div class="reply-form">
-  <form action="" method="POST">
-    <fieldset>
-      {{ form.hidden_tag() }}
+                {% for error in form.content.errors %}
+                  <p class="form-error">{{ error }}</p>
+                {% endfor %}
+              {% else %}
+                {{ form.content() }}
+              {% endif %}
 
-      {% if form.content.errors %}
-      {{ form.content() }}
-
-      {% for error in form.content.errors %}
-      <p class="form-error">{{ error }}</p>
-      {% endfor %}
+              {{ form.submit() }}
+            </fieldset>
+          </form>
+        </div>
       {% else %}
-      {{ form.content() }}
+        <a href="{{ url_for('login') }}">To reply to this question, you must login</a>
       {% endif %}
+    </div>
 
-      {{ form.submit() }}
-    </fieldset>
-  </form>
-</div>
-{% else %}
-<a href="{{url_for('login') }}"> To reply to this question, you must login</a>
-{% endif %}
-  
+    <div class="replies">
+      {% for reply in replies %}
+        <div class="reply">
+          <div class="vote-buttons">
+            <a class="vote-button upvote-icon" href="{{ url_for('upvote_comment', comment_id=reply.id, del=1) }}">&#9650;</a>
+            <span>{{ reply.votes }}</span>
+            <a class="vote-button downvote-icon" href="{{ url_for('upvote_comment', comment_id=reply.id, del=- 1) }}">&#9660;</a>
+          </div>
+
+          <div class="notvotebuttons">
+            <h4>~ <a href="{{ url_for('view_user', username=question.op.username) }}">{{ reply.op.display_name }}</a></h4>
+            <p>{{ reply.content }}</p>
+          </div>
+        </div>
+        <br />
+      {% endfor %}
+    </div>
+  </div>
 {% endblock %}

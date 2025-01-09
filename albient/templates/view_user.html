@@ -1,27 +1,49 @@
 {% extends 'base.html' %}
 
 {% block content %}
+  {% if current_user.username == user.username %}
+    <h1 class="username">{{ user.display_name }} <a href="{{ url_for('logout') }}">[Logout]</a></h1>
+  {% else %}
+    <h1 class="username">{{ user.display_name }}</h1>
+  {% endif %}
+  <div class="stats">
+    <div class="item">
+      <h2>Questions</h2>
+      <h3>{{ qa }}</h3>
+    </div>
+    <div class="item">
+      <h2>Replies</h2>
+      <h3>{{ ca }}</h3>
+    </div>
+    <div class="item">
+      <h2>Net votes</h2>
+      <h3>{{ votes }}</h3>
+    </div>
+    <div class="item">
+      <h2>Answers</h2>
+      <h3>{{ answers }}</h3>
+    </div>
+  </div>
+  <br />
+  <div class="parent">
+    <div class="view_questions">
+      <h3>Latest activity</h3>
 
-<h1 class="username">{{ user.display_name }}</h1>
-
-<div class="stats">
-    <div class="item">
-        <h2>Questions</h2>
-        <h3>{{ qa }}</h3>
+      {% for question in questions %}
+        <div class="question">
+          <div class="vote-buttons">
+            <a class="vote-button upvote-icon" href="{{ url_for('upvote_post', post_id=question.id, del=1) }}">&#9650;</a>
+            <span>{{ question.votes }}</span>
+            <a class="vote-button downvote-icon" href="{{ url_for('upvote_post', post_id=question.id, del=- 1) }}">&#9660;</a>
+          </div>
+          <div class="notvotebuttons">
+            <a href="{{ url_for('view_question', id=question.id) }}" class="question-title">Q: {{ question.title }}</a>
+            <h4>~ <a href="{{ url_for('view_user', username=question.op.username) }}">{{ question.op.display_name }}</a></h4>
+            <p>{{ question.content }}</p>
+            <small>Tags: {{ question.tags }}</small>
+          </div>
+        </div>
+      {% endfor %}
     </div>
-    <div class="item">
-        <h2>Replies</h2>
-        <h3>{{ ca }}</h3>
-    </div>
-    <div class="item">
-        <h2>Net votes</h2>
-        <h3>{{ votes }}</h3>
-    </div>
-    <div class="item">
-        <h2>Answers</h2>
-        <h3>{{ answers }}</h3>
-    </div>
-</div>
-<br><hr>
-<a href="{{ url_for('logout') }}">Logout</a>
+  </div>
 {% endblock %}

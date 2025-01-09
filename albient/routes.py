@@ -10,6 +10,7 @@ from albient.forms import (
 )
 from albient.models import User, Question, Comment, Vote
 import sqlalchemy as sa
+from sqlalchemy import func
 
 from flask import request
 
@@ -18,6 +19,21 @@ from flask import request
 @app.route("/")
 def home():
     sort_by = request.args.get("sort_by", "id")
+
+    leaderboard_data = (
+        db.session.query(
+            User.id,
+            User.username,
+            func.count(Question.id).label("questions_asked"),
+            func.count(Comment.id).label("comments_made"),
+            func.sum(Question.votes).label("total_votes_received"),
+        )
+        .outerjoin(Question, User.id == Question.user_id)
+        .outerjoin(Comment, User.id == Comment.user_id)
+        .group_by(User.id)
+        .order_by(func.sum(Question.votes).desc())
+        .all()
+    )
 
     if sort_by == "popularity":
         questions = Question.query.order_by(Question.votes.desc()).all()
@@ -31,7 +47,9 @@ def home():
     else:
         questions = Question.query.order_by(Question.id.desc()).all()
 
-    return render_template("home.html", questions=questions)
+    return render_template(
+        "home.html", questions=questions, leaderboard_data=leaderboard_data
+    )
 
 
 @app.route("/login", methods=["GET", "POST"])
@@ -138,6 +156,7 @@ def view_user(username):
         "view_user.html",
         user=user,
         qa=questions_asked,
+        questions=qa,
         votes=votes,
         answers=answers,
         ca=len(ca),
@@ -195,6 +214,16 @@ def search():
         questions = Question.query.filter(
             Question.title.contains(query) | Question.content.contains(query)
         ).all()
+    else:
+        questions = []
+    return render_template("search_results.html", query=query, questions=questions)
+
+
+@app.route("/filter_by_tag", methods=["GET"])
+def filter_by_tag():
+    query = request.args.get("q")
+    if query:
+        questions = Question.query.filter(query in Question.tags).all()
     else:
         questions = []
     return render_template("search_results.html", query=query, questions=questions)

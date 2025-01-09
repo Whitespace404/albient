@@ -29,13 +29,11 @@
         </div>
       </div>
       {% endfor %}
+
+      <h2 class="result-footer">Didn't answer your question? <a href="{{ url_for('ask')}}">Ask a new question.</a></h2>
     </div>
 
-    <div class="ask_questions">
-        <h2>Ask a Question</h2>
-
-        <button><a href="{{ url_for('ask') }}">Ask</a></button>
-    </div>
+    
   </div>
 
 {% endblock %}

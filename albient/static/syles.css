@@ -8,6 +8,7 @@
     --outer-space: #495057ff;
     --onyx: #343a40ff;
     --eerie-black: #212529ff;
+    --brick: #720E07;
 }
 
 * {
@@ -60,6 +61,7 @@ body {
 
 .parent .view_questions .question .vote-buttons a {
     margin: 5px 0;
+    font-size: 28px;
     text-decoration: none;
     cursor: pointer;
 }
@@ -134,7 +136,6 @@ body {
     padding: 10px;
     margin: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    height: 8em;
 }
 
 .parent .ask_questions h2 {
@@ -156,81 +157,13 @@ body {
     width: 100%;
 }
 
+h1 {
+    margin-left: 20px;
+}
+
 .parent .ask_questions a {
     text-decoration: none;
     color: var(--outer-space);
-}
-
-.form {
-    background-color: var(--platinum);
-    border: 1px solid var(--french-gray);
-    border-radius: 6px;
-    padding: 10px;
-    margin: 20px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    display: flex;
-    flex-direction: column;
-    width: 50%;
-    align-items: center;
-
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-}
-
-.form fieldset {
-    border-radius: 5px;
-    padding: 20px 5px;
-    margin: 0;
-}
-
-.form legend {
-    font-size: 1.5em;
-    font-weight: bold;
-    color: var(--outer-space);
-    margin-bottom: 10px;
-}
-
-.form label {
-    display: block;
-    font-weight: bold;
-    margin-top: 10px;
-    color: var(--outer-space);
-}
-
-.form input[type="email"],
-.form input[type="password"] {
-    width: 90%;
-    padding: 10px;
-    margin-top: 5px;
-    border: 1px solid var(--french-gray-2);
-    border-radius: 4px;
-}
-
-.form .form-error {
-    color: var(--blood-red);
-    font-size: 0.9em;
-    margin-top: 5px;
-}
-
-.form input[type="submit"] {
-    font-size: 1.2em;
-    font-weight: bold;
-    color: var(--antiflash-white);
-    background-color: var(--outer-space);
-    border: none;
-    padding: 10px;
-    margin-top: 20px;
-    cursor: pointer;
-    width: 100%;
-}
-
-.form a {
-    text-decoration: none;
-    margin-top: 10px;
-    display: inline-block;
 }
 
 .flash-message {
@@ -242,7 +175,6 @@ body {
     border: 1px solid rgba(1, 88, 13, 0.747);
     background-color: rgba(50, 205, 50, 0.507);
 }
-
 
 .stats {
     display: flex;
@@ -256,4 +188,103 @@ body {
     background: gray;
     border-radius: 5px;
     width: 190px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+table th,
+table td {
+    padding: 10px 15px;
+    text-align: center;
+}
+
+table thead th {
+    background-color: var(--brick);
+    color: #fff;
+    text-transform: uppercase;
+    font-size: 14px;
+}
+
+table tbody tr:nth-child(odd) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #e9ecef;
+}
+
+table tbody tr:hover {
+    background-color: var(--brick);
+    color: #fff;
+}
+
+table tbody tr:hover {
+    color: #fff;
+}
+
+table tbody td {
+    border-bottom: 1px solid #ddd;
+}
+
+table tbody tr:hover a {
+    color: #F4D35E !important;
+    text-decoration: underline !important;
+}
+
+.item {
+    color: white;
+}
+
+.item h2 {
+    margin-bottom: 22px;
+}
+
+.item h3 {
+    font-size: 24px;
+}
+
+.item:nth-child(1) {
+    background-color: #083D77;
+}
+
+
+.item:nth-child(2) {
+    background-color: #0a4e97;
+}
+
+
+.item:nth-child(3) {
+    background-color: #0c57a7;
+}
+
+
+.item:nth-child(4) {
+    background-color: #0b58a9;
+}
+
+.sort-form select {
+    padding: 8px;
+    font-size: 15px;
+}
+
+.sort-form label {
+    font-size: 15px;
+}
+
+.result-footer {
+    margin-top: 27px;
+    margin-left: 10px;
+    font-size: 19px;
+}
+
+.question p {
+    margin-top: 15px;
+}
+
+.question h4 {
+    text-align: right;
 }

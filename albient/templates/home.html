@@ -23,7 +23,7 @@
         </div>
         <div class="notvotebuttons">
           <a href="{{ url_for('view_question', id=question.id) }}" class="question-title">Q: {{ question.title }}</a>
-          <h4>~ <a href="{{ url_for('view_user', username=question.op.username)}}" style='text-decoration: none'>{{ question.op.display_name }}</a> </h4>
+          <h4>~ <a href="{{ url_for('view_user', username=question.op.username)}}">{{ question.op.display_name }}</a> </h4>
           <p>{{ question.content }}</p>
           <small>Tags: {{ question.tags }}</small>
         </div>
@@ -32,9 +32,31 @@
     </div>
 
     <div class="ask_questions">
-        <h2>Ask a Question</h2>
-
-        <button><a href="{{ url_for('ask') }}">Ask</a></button>
+        <h2>User Leaderboard</h2>
+        <table class="leaderboard">
+          <thead>
+              <tr>
+                  <th>Rank</th>
+                  <th>Username</th>
+                  <th>Questions </th>
+                  <th>Comments </th>
+                  <th>Points</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for user in leaderboard_data %}
+              <tr>
+                  <td>{{ loop.index }}</td>
+                  <td>
+                    <a href="{{ url_for('view_user', username=user.username) }}">{{ user.username }}</a> 
+                  </td>
+                  <td>{{ user.questions_asked or 0 }}</td>
+                  <td>{{ user.comments_made or 0 }}</td>
+                  <td>{{ user.total_votes_received or 0 }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
     </div>
   </div>
 

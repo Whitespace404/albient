@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <div class="form">
+  <div class="login-form ask-form register-form">
     <form action="" method="POST">
       <fieldset>
         <legend>Register</legend>
@@ -65,6 +65,8 @@
         {{ form.submit() }}
       </fieldset>
     </form>
-    <p><a href="{{ url_for('login') }}">Already have an account?</a></p>
+    <p>
+      <a href="{{ url_for('login') }}" class="small-new">Already have an account?</a>
+    </p>
   </div>
 {% endblock %}

@@ -2,3 +2,6 @@
           <a href="{{ url_for('login') }}">Login</a> {% endcomment %}
 
 base>currentuser.isauthenticated
+
+click on tag
+search bar

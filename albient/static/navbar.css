@@ -8,31 +8,24 @@
     --outer-space: #495057ff;
     --onyx: #343a40ff;
     --eerie-black: #212529ff;
-    --logo-color: #ff5733ff; /
+    --logo-color: #ff5733ff;/
 }
 
 nav.obc {
     border-bottom: 4px solid var(--french-gray);
     position: relative;
     background-color: var(--onyx);
-    z-index: 99;
+    z-index: 2;
     padding: 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
-}
-
-nav.obc section {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
+    margin-bottom: 30px;
 }
 
 .obc img {
-    width: 97px;
-    height: 40px;
-    margin-bottom: 0;
+    height: 4em;
+    margin: 10px;
     padding-bottom: 0;
 }
 
@@ -69,19 +62,44 @@ nav.obc section {
     padding: 0 20px;
 }
 
+.section {
+    display: flex;
+}
+
+.section .logo-name {
+    margin-top: 40px;
+    font-size: 25px;
+}
+
 .obc a {
     text-decoration: none;
     color: var(--seasalt);
 }
 
 #logo {
-    color: var(--french-gray); /* Apply new color to the logo */
+    color: var(--french-gray);
 }
 
 .acounts {
     padding: 10px;
+    display: flex;
 }
 
-.obc a svg{
+.searchbar {
+    margin-right: 40px;
+    color: white;
+}
+
+.obc a svg {
+    height: 1.5em;
+    margin-right: 30px;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+}
+
+.logo-name {
     color: white;
 }

@@ -23,20 +23,11 @@ body {
     background: var(--seasalt);
 }
 
-#logo {
-    font-size: 2em;
-    padding: 0 20px;
-    font-weight: bolder;
-    color: var(--outer-space);
-}
-
 .parent {
     display: grid;
     grid-template-columns: 8fr 4fr;
     grid-template-rows: 1fr;
     grid-template-areas: "view_questions ask_questions";
-    /* min-height: 100vh; */
-    /* width: 100vw; */
 }
 
 .parent>* {
@@ -52,7 +43,6 @@ body {
     display: flex;
 }
 
-/* Vote buttons*/
 .parent .view_questions .question .vote-buttons {
     display: flex;
     flex-direction: column;
@@ -74,11 +64,9 @@ body {
     cursor: pointer;
 }
 
-/* Not vote buttons*/
 .parent .view_questions .question .notvotebuttons {
     background-color: var(--antiflash-white);
     border: 1px solid var(--french-gray);
-    /* border-radius: 6px; */
     padding: 10px;
     margin-left: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -113,14 +101,14 @@ body {
     padding: 10px;
     margin: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    
-    overflow: hidden; /* Hide the scrollbar */
-    -ms-overflow-style: none; /* Internet Explorer 10+ */
-    scrollbar-width: none; /* Firefox */
+
+    overflow: hidden;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
 }
 
 .parent .view_questions::-webkit-scrollbar {
-    display: none; /* Safari and Chrome */
+    display: none;
 }
 
 .parent .view_questions .sortby a {
@@ -173,8 +161,6 @@ body {
     color: var(--outer-space);
 }
 
-/* ################################################################################## */
-
 .form {
     background-color: var(--platinum);
     border: 1px solid var(--french-gray);
@@ -186,7 +172,7 @@ body {
     flex-direction: column;
     width: 50%;
     align-items: center;
-    
+
     position: absolute;
     top: 50%;
     left: 50%;
@@ -247,5 +233,27 @@ body {
     display: inline-block;
 }
 
-/* end forms */
+.flash-message {
+    padding: 10px 0;
+    padding-left: 10px;
+}
 
+.flash-message {
+    border: 1px solid rgba(1, 88, 13, 0.747);
+    background-color: rgba(50, 205, 50, 0.507);
+}
+
+
+.stats {
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.stats .item {
+    margin: 10px;
+    padding: 30px;
+    text-align: center;
+    background: gray;
+    border-radius: 5px;
+    width: 190px;
+}

@@ -2,11 +2,17 @@ from flask import render_template, redirect, url_for, flash, request
 from flask_login import current_user, login_required, login_user, logout_user
 
 from albient import app, db
-from albient.forms import LoginForm, CreateUserForm, CreatePostForm, ReplyPostForm
+from albient.forms import (
+    LoginForm,
+    CreateUserForm,
+    CreatePostForm,
+    ReplyPostForm,
+)
 from albient.models import User, Question, Comment, Vote
 import sqlalchemy as sa
 
 from flask import request
+
 
 @app.route("/home")
 @app.route("/")
@@ -34,7 +40,9 @@ def login():
         return redirect(url_for("home"))
     form = LoginForm()
     if form.validate_on_submit():
-        user = User.query.filter_by(email=form.email.data).first() # .first(), .all(), .last()
+        user = User.query.filter_by(
+            email=form.email.data
+        ).first()  # .first(), .all(), .last()
         if user is None:
             flash("Incorrect username/password", "alert")
         elif form.password.data == user.password:
@@ -78,7 +86,12 @@ def register():
 def ask():
     form = CreatePostForm()
     if form.validate_on_submit():
-        question = Question(title=form.title.data, content=form.content.data, op=current_user, tags=form.tags.data)
+        question = Question(
+            title=form.title.data,
+            content=form.content.data,
+            op=current_user,
+            tags=form.tags.data,
+        )
         db.session.add(question)
         db.session.commit()
 
@@ -101,8 +114,14 @@ def view_question():
         db.session.add(reply)
         db.session.commit()
         flash("Reply added")
-        return redirect(url_for('view_question', id=question.id))
-    return render_template("view_question.html", form=form, title="Reply", question=question, replies=replies)
+        return redirect(url_for("view_question", id=question.id))
+    return render_template(
+        "view_question.html",
+        form=form,
+        title="Reply",
+        question=question,
+        replies=replies,
+    )
 
 
 @app.route("/view_user/<username>")
@@ -167,3 +186,15 @@ def upvote_comment(comment_id):
         db.session.commit()
         return redirect(request.referrer)
     return "Comment not found.", 404
+
+
+@app.route("/search", methods=["GET"])
+def search():
+    query = request.args.get("q")
+    if query:
+        questions = Question.query.filter(
+            Question.title.contains(query) | Question.content.contains(query)
+        ).all()
+    else:
+        questions = []
+    return render_template("search_results.html", query=query, questions=questions)

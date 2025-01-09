@@ -1,7 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
   <div class="form">
     <form action="" method="POST">
       <fieldset>
@@ -29,7 +28,7 @@
         {% else %}
           {{ form.content() }}
         {% endif %}
-        <br>
+        <br />
         {{ form.tags.label }}
         {% if form.tags.errors %}
           {{ form.tags() }}
@@ -45,5 +44,4 @@
       </fieldset>
     </form>
   </div>
-  
 {% endblock %}

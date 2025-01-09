@@ -1,60 +1,5 @@
-:root {
-    --licorice: #220901ff;
-    --blood-red: #621708ff;
-    --penn-red: #941b0cff;
-    --rust: #bc3908ff;
-    --orange-web: #f6aa1cff;
-}
 
-body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Monaspace Radon Var';
-    background: rgb(208, 208, 208);
-}
 
-h1 {
-    color: hotpink;
-    margin-left: 10px;
-}
-
-.question {
-    background-color: #f3f3f3;
-    border-radius: 10px;
-    margin: 10px 10px;
-    padding: 10px;
-    border: 2px solid silver;
-}
-
-nav.obc {
-    display: flex;
-    justify-content: space-evenly;
-    background-color: var(--licorice);
-    padding: 10px 0px;
-}
-
-.obc a {
-    text-decoration: none;
-    color: white;
-    transition: all 100ms;
-}
-
-.obc span {
-    color: white;
-}
-
-.obc a:hover {
-    text-decoration: underline;
-}
-
-.question a {
-    color: rgb(5, 104, 185);
-}
-
-.flash-message {
-    padding: 10px 0;
-    padding-left: 10px;
-}
 
 .form {
     display: flex;
@@ -133,20 +78,6 @@ nav.obc {
 .vote-buttons {
     display: flex;
     gap: 15px;
-}
-
-.stats {
-    display: flex;
-    justify-content: space-evenly;
-}
-
-.stats .item {
-    margin: 10px;
-    padding: 30px;
-    text-align: center;
-    background: gray;
-    border-radius: 5px;
-    width: 190px;
 }
 
 .username {

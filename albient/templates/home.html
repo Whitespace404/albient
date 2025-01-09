@@ -6,11 +6,13 @@
 
 <form method="get" action="{{ url_for('home') }}">
     <label for="sort_by">Sort by:</label>
+    
     <select id="sort_by" name="sort_by" onchange="this.form.submit()">
         <option value="id" {% if request.args.get('sort_by') == 'id' %}selected{% endif %}>Newest</option>
         <option value="popularity" {% if request.args.get('sort_by') == 'popularity' %}selected{% endif %}>Popularity</option>
         <option value="comments" {% if request.args.get('sort_by') == 'comments' %}selected{% endif %}>Answers</option>
     </select>
+
 </form>
 
 {% for question in questions %}

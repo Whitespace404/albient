@@ -40,8 +40,7 @@ def login():
         elif form.password.data == user.password:
             login_user(user)
             flash(f"Logged in")
-            next_page = request.args.get("next")
-            return redirect(next_page if next_page else url_for("home"))
+            return redirect(url_for("home"))
         else:
             flash("Incorrect username/password", "alert")
             return redirect(url_for("login"))

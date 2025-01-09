@@ -4,19 +4,14 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>{{ title }}</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename='style.css')}}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
   </head>
 
   <body>
-
-    {% with messages = get_flashed_messages(with_categories = true) %}
+    {% with messages=get_flashed_messages(with_categories=true) %}
       {% if messages %}
         {% for category, message in messages %}
-          <div class="flash-message {{ category }}">
-            {{ message }}
-             
-          </div>
-
+          <div class="flash-message {{ category }}">{{ message }}</div>
         {% endfor %}
       {% endif %}
     {% endwith %}
@@ -24,19 +19,20 @@
     <nav class="obc">
       <a href="{{ url_for('home') }}">Albient</a>
       {% if not current_user.is_authenticated %}
-      <a href="{{ url_for('register') }}">Register</a>
+        <a href="{{ url_for('register') }}">Register</a>
       {% endif %}
       <a href="{{ url_for('ask') }}">Ask</a>
 
       {% if current_user.is_authenticated %}
-      <a href="{{ url_for('logout') }}">Logout</a>    
-      <span>Welcome, <a href="{{url_for('view_user', username= current_user.username)}}">{{ current_user.username }}</a></span>
+        <a href="{{ url_for('logout') }}">Logout</a>
+        <span>Welcome, <a href="{{ url_for('view_user', username=current_user.username) }}">{{ current_user.username }}</a></span>
       {% else %}
         <a href="{{ url_for('login') }}">Login</a>
       {% endif %}
     </nav>
 
     {% block content %}
+
     {% endblock %}
   </body>
 </html>
